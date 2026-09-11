@@ -1,19 +1,21 @@
 function initPlayer() {
     return {
-        version: "1.0.0"
+        version: "1.0.0",
+        points: new Decimal(0), //the main currency, gained by 10^^(1+tetrationPower/1000) every second
+        tetrationPower: new Decimal(0) //starts at 0, +1 every time you press the button
     }
 }
 
-NAME = "67" //place you want to direct your local storage thing
+NAME = "baseline_save" //place you want to direct your local storage thing
 //change this to sth else to enable saving!!!
 
 
 
 player = initPlayer()
 
-const player_vars_d = []
+const player_vars_d = ["points", "tetrationPower"]
 const player_vars_l = []
-const player_vars_str = []
+const player_vars_str = ["version"]
 
 function detectNaN() {
     for (var i in player_vars_d) {
@@ -42,15 +44,22 @@ function save() {
 if (NAME != "67") s = setInterval(save, 1000, 1)
 
 function load() {
-    var u = JSON.parse(localStorage.getItem(NAME))
-    console.log(JSON.parse(localStorage.getItem(NAME)))
+    var raw = localStorage.getItem(NAME)
+    if (raw == undefined || raw == null) { return } //no save yet -> keep the initPlayer() values
+    var u = undefined
+    try { u = JSON.parse(raw) } catch (e) { console.log("save is corrupted, starting over"); return }
+    if (u == undefined || u == null) { return }
+    console.log(u)
     for (var i in player_vars_d) {
-        player[player_vars_d[i]] = new Decimal(u[player_vars_d[i]])
+        var v = player_vars_d[i]
+        //keys that aren't in the save (or that broke) fall back to their initPlayer() value
+        player[v] = (u[v] == undefined || new Decimal(u[v]).isNan()) ? initPlayer()[v] : new Decimal(u[v])
     }
     for (var i in player_vars_l) {
         player[player_vars_l[i]] = initPlayer()[player_vars_l[i]]
         for (var j in u[player_vars_l[i]]) {
             player[player_vars_l[i]][j] = new Decimal(u[player_vars_l[i]][j])
+            if (player[player_vars_l[i]][j].isNan()) { player[player_vars_l[i]][j] = initPlayer()[player_vars_l[i]][j] }
         }
     }
     for (var i in player_vars_str) {
