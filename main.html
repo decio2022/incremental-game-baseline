@@ -26,9 +26,31 @@
 
     <div id="app">
 
-        
-        {{player}}
-        {{funcs.goo()}}
+        <div class="game">
+
+            <h1 class="title">Baseline</h1>
+
+            <!--the main currency-->
+            <div class="panel">
+                <div class="panel-name">Points</div>
+                <div class="panel-value points" v-html="format(player.points)"></div>
+                <div class="panel-sub">
+                    <span v-html="'+' + format(funcs.pointsGain())"></span> per second
+                </div>
+            </div>
+
+            <!--the thing the button gives you-->
+            <div class="panel">
+                <div class="panel-name">Tetration Power</div>
+                <div class="panel-value tetration" v-html="format(player.tetrationPower, 0)"></div>
+                <div class="panel-sub">
+                    <span v-html="'points gain = 10^^' + format(funcs.tetrationHeight(), 3)"></span>
+                </div>
+            </div>
+
+            <button class="btn" @click="funcs.addTetrationPower()">+1 Tetration Power</button>
+
+        </div>
 
         <!--How to use: You uhhhh put stuff here it's that simple-->
         <!--All the formatting, and the saving stuff has been done-->

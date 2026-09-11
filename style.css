@@ -2,3 +2,90 @@
     font-family: monospace;
     margin: 10px;
 }
+
+body {
+    margin: 0;
+    padding: 20px 10px;
+    background: #0e1117;
+    color: #e2e8f4;
+    min-height: 100vh;
+}
+
+.game {
+    margin: 0 auto;
+    max-width: 520px;
+}
+
+.title {
+    margin: 6px 0 18px 0;
+    text-align: center;
+    font-size: 1.6rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #8b9dc3;
+}
+
+.panel {
+    margin: 0 0 14px 0;
+    padding: 14px 18px;
+    background: #161b26;
+    border: 1px solid #262d3d;
+    border-radius: 10px;
+}
+
+.panel-name {
+    margin: 0 0 4px 0;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #7a869e;
+}
+
+.panel-value {
+    margin: 0;
+    font-size: 2.1rem;
+    font-weight: bold;
+    line-height: 1.15;
+    word-break: break-all;
+}
+
+.panel-value.points {
+    color: #ffd469;
+}
+
+.panel-value.tetration {
+    color: #6ad4ff;
+}
+
+.panel-sub {
+    margin: 6px 0 0 0;
+    font-size: 0.85rem;
+    color: #93a0b8;
+    word-break: break-all;
+}
+
+.btn {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    margin: 18px 0 0 0;
+    padding: 14px 18px;
+    font-size: 1rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    color: #06121a;
+    background: #6ad4ff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.12s, transform 0.06s;
+}
+
+.btn:hover {
+    background: #93e2ff;
+}
+
+.btn:active {
+    background: #4cc3f5;
+    transform: translateY(1px);
+}
